@@ -52,3 +52,9 @@ INSERT INTO student_fn (cin, first_name, last_name, school_id, school_address)
 SELECT cin, first_name, last_name, school_id, school_address FROM student_mv;
 
 
+CREATE TABLE IF NOT EXISTS student_has_skill(
+    cin INTEGER, 
+    skill TEXT, 
+    how_hard_is_skill TEXT,
+    PRIMARY KEY(cin,skill)
+);
