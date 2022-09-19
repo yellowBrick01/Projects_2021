@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS student_fn (
 );
 
 INSERT INTO student_fn (id_no, first_name, last_name, school_id, school_address, school_name)
-SELECT id_no, first_name, last_name, school_id, school_address, school_name FROM student_mv;;
+SELECT id_no, first_name, last_name, school_id, school_address, school_name FROM student_mv;
 
 SELECT COUNT(*) AS total_rows FROM student_fn;
 SELECT * FROM student_fn;
@@ -154,3 +154,55 @@ DROP COLUMN skill_category;
 
 SELECT COUNT(*) AS total_rows FROM student_has_skill;
 SELECT * FROM student_has_skill;
+
+CREATE TABLE IF NOT EXISTS school (
+    school_id INTEGER PRIMARY KEY,
+    school_address TEXT,
+    school_name TEXT
+);
+
+INSERT INTO school (school_id, school_address, school_name)
+SELECT school_id, school_address, school_name FROM student_fn;
+
+SELECT COUNT(*) AS total_rows FROM school;
+SELECT * FROM school;
+
+CREATE TABLE IF NOT EXISTS student_school_t(
+    id_no INTEGER, 
+    school_id,
+    PRIMARY KEY (id_no, school_id)
+);
+
+INSERT into student_school_t (id_no, school_id)
+SELECT student_fn.id_no, school.school_id
+FROM student_fn JOIN school
+ON student_fn.school_id = school.school_id;
+
+ALTER TABLE student_fn DROP COLUMN school_id;
+ALTER TABLE student_fn DROP COLUMN school_address;
+ALTER TABLE student_fn DROP COLUMN school_name;
+
+SELECT student_fn.first_name AS Name, 
+school.school_name AS School, 
+school.school_address AS Address, 
+skill_t.skill_name,
+skill_t.skill_category,
+student_has_skill.proficency
+FROM student_fn JOIN student_school_t ON student_fn.id_no = student_school_t.id_no
+JOIN school ON student_school_t.school_id = school.school_id
+JOIN student_has_skill on student_fn.id_no = student_has_skill.id_no
+JOIN skill_t on skill_t.skill_name = student_has_skill.skill;
+
+SELECT student_fn.first_name AS Name, 
+school.school_name AS School, 
+school.school_address AS Address, 
+skill_t.skill_name,
+skill_t.skill_category,
+student_has_skill.proficency
+FROM student_fn JOIN student_school_t ON student_fn.id_no = student_school_t.id_no
+JOIN school ON student_school_t.school_id = school.school_id
+JOIN student_has_skill on student_fn.id_no = student_has_skill.id_no
+JOIN skill_t on skill_t.skill_name = student_has_skill.skill
+WHERE skill_t.skill_category = "Computer Science"
+AND
+student_has_skill.proficency != "VL";
