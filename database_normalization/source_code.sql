@@ -206,3 +206,22 @@ JOIN skill_t on skill_t.skill_name = student_has_skill.skill
 WHERE skill_t.skill_category = "Computer Science"
 AND
 student_has_skill.proficency != "VL";
+
+SELECT first_name AS Name, 
+school_name AS School, 
+school_address AS Address, 
+skill, 
+skill_category, 
+proficency
+FROM student_rg;
+
+SELECT first_name AS Name, 
+school_name AS School, 
+school_address AS Address, 
+skill, 
+skill_category, 
+proficency
+FROM student_rg
+WHERE skill_category = "Computer Science"
+AND
+proficency != "VL";
