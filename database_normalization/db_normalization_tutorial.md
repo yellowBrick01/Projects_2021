@@ -33,7 +33,7 @@ Here is how we are going to represent Fundamental Entities in our Entity Relatio
 
 **Attributive Entity**: An entity that depends on another entity for parts of its primary key(_discussed later_).
 
-- Example:  A student’s hobby is dependent on the student. Therefore, if we create a student-hobby table will need to contain some information that will uniquely identify the student.
+- Example: A student’s hobby is dependent on the student. Therefore, if we create a student-hobby table will need to contain some information that will uniquely identify the student.
 
 Here is how we are going to represent Attributive Entities in our Entity Relationship Diagram (ERD):
  
@@ -47,9 +47,30 @@ Here is how we are going to represent Associative Entities in our Entity Relatio
 <img src = "https://user-images.githubusercontent.com/76761559/192187251-627f76a6-0a34-4fc3-ae0f-88d45d6f1742.png" width="300" height="150">
 
 ## Types Of Relationships
-**One-to-One Relationship**: Connects one entity to one other entity.
-- Example: A bussing company assigns _one_ driver to _one_ spceific bus. This means that a driver record on our database should only relate to one bus.
+**One-to-One Relationship**: Connects _one_ record from an entity to _one_ record of  antother entity.
+- Example: A bussing company assigns one driver to one spceific bus. This means that a driver record on our database should only relate to one bus.
 
 Here is how we are going to represent One-to-One Relationships in our Entity Relationship Diagram (ERD):
 
 <img src = "https://user-images.githubusercontent.com/76761559/192189632-6e29e775-28d7-4b3f-ab3d-c3054c6f27f6.png" width="800" height="200">
+
+**One-to-Many Relationship**: Connects _one_ record from an entity to _one or more_ records of another entity.
+- Example: An owner can own one or many vehicles. This means that an owner record on our database could relate to one or more vehicles.
+
+Here is how we are going to represent One-to-Many Relationships in our Entity Relationship Diagram (ERD):
+
+<img src = "https://user-images.githubusercontent.com/76761559/192195525-480f2a0a-8e9f-4ba2-86e7-e06dd3cacd19.png" width="800" height="200">
+
+**Many-to-Many Relationship**: Connects _one or many_ records from an entity to _one or more_ records of another entity.
+- Warning: Many-to-Many relationships create data redundancy and may cause inaccuracies in the results of queries. Thus, it is recommended to create an Assocaitve Entity to transform the Many-to-Many relationship into two One-to-Many relationships.
+- Example: Many students will be enrolled in many high school courses.
+  - Bad Practice: Many records of the student entity will be related to many records in the course entity.
+  - Good Practice: A student enrollment entity will be placed between the student and course entities. This will allow the database to better manage the students' course enrollment because the student enrollment entity will many records  that corresponds to a specific student and a specific course.
+
+Here is how we are going to represent Many-to-Many Relationships without an Assocaitve Entity in our ERD -- Not recommend:
+
+<img src = "https://user-images.githubusercontent.com/76761559/192199822-0bf39d9c-96a2-4f37-aa66-5ad1b1e5f82f.png" width="800" height="200">
+
+Here is how we are going to represent Many-to-Many Relationships with an Assocaitve Entity in our ERD -- Recommend:
+
+<img src = "https://user-images.githubusercontent.com/76761559/192200452-a2dccc04-2347-4eff-94e6-ac454a3871e3.png" width="800" height="200">
