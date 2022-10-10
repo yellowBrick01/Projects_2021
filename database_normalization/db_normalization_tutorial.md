@@ -74,3 +74,21 @@ Here is how we are going to represent Many-to-Many Relationships without an Asso
 Here is how we are going to represent Many-to-Many Relationships with an Assocaitve Entity in our ERD -- Recommend:
 
 <img src = "https://user-images.githubusercontent.com/76761559/192200452-a2dccc04-2347-4eff-94e6-ac454a3871e3.png" width="800" height="200">
+
+## Types of Keys
+The first thing that you must know is that all types of keys in a relational database must be unique and not null.
+
+**Primary Key**: A unique field that identifies a specific record of an entity.
+
+**Candidate Key**: Any field or collection of fields that could serve as the primary key of an entity.
+
+**Foreign Key**: The primary key of a different entity that is used to establish relations between entities.
+
+**Composite Key**: Two or more fields that are used to identify a specific record of an entity.
+- *Reminder*: A traditional primary key consists of a single field, and a composite key consists of multiple fields.
+
+## Normal Forms 1--3
+Before we begin, we must remember that database normalization is a sequential process. This means that a database cannot achieve a higher normal form without first achieving the previous normal form.
+- Example: A requirement for Second Normal Form is achieving First Normal Form.
+
+### 1st Normal Form
