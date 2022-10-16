@@ -92,3 +92,32 @@ Before we begin, we must remember that database normalization is a sequential pr
 - Example: A requirement for Second Normal Form is achieving First Normal Form.
 
 ### 1st Normal Form
+The first step to making a properly normalized database.
+
+**Rule**: No Repeating Groups/ Multivalued Attributes in the database.
+- *Repeating Groups*: A repeating set of values that occurred with an entity.
+- *Multivalued Attributes*: A record that contains multiple values of a field(s).
+   - Note: We will go into more detail about the difference between Repeating Groups and Multivalued Attributes during the case study.
+
+**Process**: Remove the Repeating Groups and/or Multivalued Attributes and places them into a new entity.
+
+### 2nd Normal Form
+**Rule**: Must be in 1st normal form & cannot have partial dependencies
+- *Partial Dependency*: An attribute is functionally dependent on part of a record's key, not the whole key.
+
+**Process**: create a new entity. Convert an attributive entity to an associative entity.
+
+### 3rd Normal Form
+**Rule**: Must be in 2nd normal form & cannot have any transitive dependencies
+- *Transitive Dependency*: A non-key field is dependent on another non-key field.
+
+**Process**: Create a new entity that contains the fields that form the transitive dependency.
+
+## Case Study: Normalize this unnormalized Student Table
+
+### Before we begin
+The following case study focuses on how to normalize an unnormalized table.
+
+- Meaning, the case study does not represent a finished database.
+- The following SQL statements lack key features, most notable the needed constraints
+
