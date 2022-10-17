@@ -121,3 +121,71 @@ The following case study focuses on how to normalize an unnormalized table.
 - Meaning, the case study does not represent a finished database.
 - The following SQL statements lack key features, most notable the needed constraints
 
+## Case Study: Normalize this unnormalized Student Table
+### Stage 01: Going from an unnormalized table  to 1st Normal Form
+As stated before, we go into detail on the main differences between Repeating Groups and Multivalue Attributes by studying the unnormalized student table.
+
+First, let us create the two unnormalized student tables and insert values into them:
+```
+/*
+This SQL statement to create an unnormalized Student table that utilizes multivalue attributes.
+*/
+
+CREATE TABLE IF NOT EXISTS student_mv (
+    id_no INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    school_id INTEGER,
+    school_address TEXT,
+    school_name TEXT, 
+    skill TEXT,
+    skill_category TEXT,
+    proficency TEXT
+);
+```
+
+```
+/*
+This SQL statement to insert data into the unnormalized Student table that utilizes multivalue attributes.
+*/
+
+INSERT INTO student_mv (id_no, first_name, last_name, school_id, school_address, school_name, skill, skill_category, proficency)
+VALUES ('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'English, Java, SQL',
+    'Language, Computer Science, Computer Science',
+'VH, H, M'),
+('222444666',
+    'Sam',
+    'Pam',
+    '100200300',
+    '1234 Fake St.',
+    'Microsoft H.S',    
+    'Python',
+    'Computer Science',
+'VH'),
+('111222333',
+    'Kate',
+    'Late',
+    '999888777',
+    '4321 Noname Ave.',
+    'Github H.S',
+    'HTML',
+    'Computer Science', 
+'VL');
+```
+
+## Introduction to Database Denormalization
+Introduction to Database Denormalization
+Denormalization is not simply the opposite of database normalization or the absence of database normalization.
+
+The process of database denormalization is adding data redundancy in the database to meet any speed and optimization requirements set for the database (SELECT statements).
+
+*Benefit*: Simple SELECT statements and faster data retrieval
+- No need for many JOIN statements to retrieve the requested data.
+
+*Warning*: Inserting and managing data will be more complex due to the data redundancy.
