@@ -1,5 +1,5 @@
 /*
-This 
+This SQL statement to create an unnormalized Student table that utilizes multivalue attributes.
 */
 
 CREATE TABLE IF NOT EXISTS student_mv (
@@ -13,6 +13,10 @@ CREATE TABLE IF NOT EXISTS student_mv (
     skill_category TEXT,
     proficency TEXT
 );
+
+/*
+This SQL statement to insert data into the unnormalized Student table that utilizes multivalue attributes.
+*/
 
 INSERT INTO student_mv (id_no, first_name, last_name, school_id, school_address, school_name, skill, skill_category, proficency)
 VALUES ('123456789',
