@@ -121,6 +121,13 @@ The following case study focuses on how to normalize an unnormalized table.
 - Meaning, the case study does not represent a finished database.
 - The following SQL statements lack key features, most notable the needed constraints
 
+Technology used to create this case study:
+- The following SQL statment are written in SQLite
+  - Click [here](https://www.sqlite.org/index.html) to learn more about SQLite.
+  - Click [here](https://github.com/yellowBrick01/Projects_2021/blob/main/database_normalization/source_code.sql) to see the source code used in this document
+- I am using SQLiteStudio to run the SQL statements.
+  - Click [here](https://sqlitestudio.pl/) to learn more about SQLiteStudio
+
 ## Case Study: Normalize this unnormalized Student Table
 ### Stage 01: Going from an unnormalized table  to 1st Normal Form
 As stated before, we go into detail on the main differences between Repeating Groups and Multivalue Attributes by studying the unnormalized student table.
@@ -178,6 +185,112 @@ VALUES ('123456789',
     'Computer Science', 
 'VL');
 ```
+
+```
+/*
+This SQL statement to create an unnormalized Student table that utilizes repeating groups.
+*/
+CREATE TABLE IF NOT EXISTS student_rg (
+    id_no INTEGER NOT NULL,
+    first_name TEXT,
+    last_name TEXT,
+    school_id INTEGER,
+    school_address TEXT,
+    school_name TEXT, 
+    skill TEXT,
+    skill_category TEXT,
+    proficency TEXT
+);
+```
+
+```
+/*
+This SQL statement to insert data into the unnormalized Student table that utilizes repeating groups.
+*/
+INSERT INTO student_rg (id_no, first_name, last_name, school_id, school_address, school_name, skill, skill_category, proficency)
+VALUES ('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'English',
+    'Language',
+'VH'),
+('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'Java',
+    'Computer Science',
+'H'),
+('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'SQL',
+    'Computer Science',
+'M'),
+('222444666',
+    'Sam',
+    'Pam',
+    '100200300',
+    '1234 Fake St.',
+    'Microsoft H.S',    
+    'Python',
+    'Computer Science',
+'VH'),
+('111222333',
+    'Kate',
+    'Late',
+    '999888777',
+    '4321 Noname Ave.',
+    'Github H.S',
+    'HTML',
+    'Computer Science', 
+'VL');
+
+```
+
+Now that we have created our two unnormalized student tables, let us run some queries to compare them.
+
+```
+/*
+Returns the total number of rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+*/
+SELECT COUNT(*) AS total_rows FROM student_mv;
+```
+
+Here is the result:
+
+<img src = "https://user-images.githubusercontent.com/76761559/197420343-274b59dd-d33c-4e1f-842a-d0cc27bb0f06.PNG" width="400" height="200">
+
+
+```
+/*
+Returns all the rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+*/
+SELECT * FROM student_mv;
+```
+
+Here is the result:
+
+![Capture_DN02](https://user-images.githubusercontent.com/76761559/197421281-06934be4-5acf-45cb-994e-fa58d968f471.PNG)
+
+Note the highlighted section of our results. The school has identified that Tom has three skills(English,  Java, SQL). The database users decided to put all the information of skills into a single record.
+
+*Benefit*:
+- Can use Tom's ID number as the primary key of their record since they only have a single record.
+Speed of processing is faster because there a fewer records. 
+
+*Drawback*: 
+- Query/updates will be error-prone due to the extra data within the fields
+  - Example: It will be difficult to get only the information related to Tom's Java knowledge
+
 
 ## Introduction to Database Denormalization
 Introduction to Database Denormalization
