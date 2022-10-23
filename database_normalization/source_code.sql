@@ -47,9 +47,20 @@ VALUES ('123456789',
     'Computer Science', 
 'VL');
 
+/*
+This SQL statement returns the total number of rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+*/
 SELECT COUNT(*) AS total_rows FROM student_mv;
+
+
+/*
+This SQL statement returns all the rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+*/
 SELECT * FROM student_mv;
 
+/*
+This SQL statement to create an unnormalized Student table that utilizes repeating groups.
+*/
 CREATE TABLE IF NOT EXISTS student_rg (
     id_no INTEGER NOT NULL,
     first_name TEXT,
@@ -62,6 +73,9 @@ CREATE TABLE IF NOT EXISTS student_rg (
     proficency TEXT
 );
 
+/*
+This SQL statement to insert data into the unnormalized Student table that utilizes repeating groups.
+*/
 INSERT INTO student_rg (id_no, first_name, last_name, school_id, school_address, school_name, skill, skill_category, proficency)
 VALUES ('123456789',
     'Tom',
