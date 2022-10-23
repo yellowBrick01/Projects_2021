@@ -48,13 +48,13 @@ VALUES ('123456789',
 'VL');
 
 /*
-This SQL statement returns the total number of rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+Returns the total number of rows(records) in the unnormalized Student table that utilizes multivalue attributes.
 */
 SELECT COUNT(*) AS total_rows FROM student_mv;
 
 
 /*
-This SQL statement returns all the rows(records) in the unnormalized Student table that utilizes multivalue attributes.
+Returns all the rows(records) in the unnormalized Student table that utilizes multivalue attributes.
 */
 SELECT * FROM student_mv;
 
