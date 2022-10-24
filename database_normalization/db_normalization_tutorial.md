@@ -97,7 +97,7 @@ The first step to making a properly normalized database.
 **Rule**: No Repeating Groups/ Multivalued Attributes in the database.
 - *Repeating Groups*: A repeating set of values that occurred with an entity.
 - *Multivalued Attributes*: A record that contains multiple values of a field(s).
-   - Note: We will go into more detail about the difference between Repeating Groups and Multivalued Attributes during the case study.
+   - Note: Please review "Appendix 01: Multivalued Attributes V.S Repeating Groups" for details about the difference between Repeating Groups and Multivalued Attributes
 
 **Process**: Remove the Repeating Groups and/or Multivalued Attributes and places them into a new entity.
 
