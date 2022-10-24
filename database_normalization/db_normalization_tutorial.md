@@ -18,7 +18,7 @@ At the end of this tutorial, you would be **able to**:
 ## Types Of Entities
 The first thing that you should know is that within a relational database, all entities are presented as tables.  Therefore, it would be helpful to think of entities as a table that you might see in an Excel spreadsheet. Moreover, many people will use the terms "entity" and "table" interchangeably.
 
-Here is an example of a student entity/table on SQLLite Studio:
+Here is an example of a student entity/table on SQLite Studio:
 
 <img src = "https://user-images.githubusercontent.com/76761559/192178228-620680a0-9373-48ad-8f27-3fbe62d00a5a.PNG" width="400" height="200">
 
@@ -130,6 +130,115 @@ Technology used to create this case study:
 
 ## Case Study: Normalize this unnormalized Student Table
 ### Stage 01: Going from an unnormalized table  to 1st Normal Form
+Let us begin our case study by creating and inserting data into the unnormalized student table.
+
+```
+/*
+This SQL statement to create an unnormalized Student table that utilizes repeating groups.
+*/
+CREATE TABLE IF NOT EXISTS student_rg (
+    id_no INTEGER NOT NULL,
+    first_name TEXT,
+    last_name TEXT,
+    school_id INTEGER,
+    school_address TEXT,
+    school_name TEXT, 
+    skill TEXT,
+    skill_category TEXT,
+    proficency TEXT
+);
+```
+
+```
+/*
+This SQL statement to insert data into the unnormalized Student table that utilizes repeating groups.
+*/
+INSERT INTO student_rg (id_no, first_name, last_name, school_id, school_address, school_name, skill, skill_category, proficency)
+VALUES ('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'English',
+    'Language',
+'VH'),
+('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'Java',
+    'Computer Science',
+'H'),
+('123456789',
+    'Tom',
+    'King',
+    '145789022',
+    '2259 NotReal Ave.',
+    'Straw Hat H.S',
+    'SQL',
+    'Computer Science',
+'M'),
+('222444666',
+    'Sam',
+    'Pam',
+    '100200300',
+    '1234 Fake St.',
+    'Microsoft H.S',    
+    'Python',
+    'Computer Science',
+'VH'),
+('111222333',
+    'Kate',
+    'Late',
+    '999888777',
+    '4321 Noname Ave.',
+    'Github H.S',
+    'HTML',
+    'Computer Science', 
+'VL');
+
+```
+
+Now let us run some queries to test our new table.
+
+```
+/*
+Returns the total number of rows(records) in the unnormalized Student table that utilizes repeating groups..
+*/
+SELECT COUNT(*) AS total_rows FROM student_rg;
+```
+
+Here is the result:
+
+<img src = "https://user-images.githubusercontent.com/76761559/197426241-49d170ff-8223-4469-ba8e-c5009cf741d9.PNG" width="400" height="200">
+
+```
+/*
+Returns all the rows(records) in the unnormalized Student table that utilizes repeating groups.
+*/
+SELECT * FROM student_rg;
+```
+
+Here is the result:
+
+![Capture_DN04](https://user-images.githubusercontent.com/76761559/197427132-408002b2-5b02-4a2c-b4f7-0e8bdad6da9a.PNG)
+
+
+## A  brief introduction to Database Denormalization
+Do not think Database Denormalization as simply the opposite of database normalization or the absence of database normalization.
+The process of database denormalization is adding data redundancy in the database to meet any speed and optimization requirements set for the database (SELECT statements).
+
+*Benefit*: 
+- Simple SELECT statements and faster data retrieval
+- No need for many join statements to retrieve the requested data.
+
+*Warning*: Inserting and managing data will be more complex due to the data redundancy.
+
+## Appendix
+### Appendix 01: Multivalued Attributes V.S Repeating Groups
 As stated before, we go into detail on the main differences between Repeating Groups and Multivalue Attributes by studying the unnormalized student table.
 
 First, let us create the two unnormalized student tables and insert values into them:
@@ -291,14 +400,34 @@ Speed of processing is faster because there a fewer records.
 - Query/updates will be error-prone due to the extra data within the fields
   - Example: It will be difficult to get only the information related to Tom's Java knowledge
 
+```
+/*
+Returns the total number of rows(records) in the unnormalized Student table that utilizes repeating groups..
+*/
+SELECT COUNT(*) AS total_rows FROM student_rg;
+```
 
-## Introduction to Database Denormalization
-Introduction to Database Denormalization
-Denormalization is not simply the opposite of database normalization or the absence of database normalization.
+Here is the result:
 
-The process of database denormalization is adding data redundancy in the database to meet any speed and optimization requirements set for the database (SELECT statements).
+<img src = "https://user-images.githubusercontent.com/76761559/197426241-49d170ff-8223-4469-ba8e-c5009cf741d9.PNG" width="400" height="200">
 
-*Benefit*: Simple SELECT statements and faster data retrieval
-- No need for many JOIN statements to retrieve the requested data.
+```
+/*
+Returns all the rows(records) in the unnormalized Student table that utilizes repeating groups.
+*/
+SELECT * FROM student_rg;
+```
 
-*Warning*: Inserting and managing data will be more complex due to the data redundancy.
+Here is the result:
+
+![Capture_DN04](https://user-images.githubusercontent.com/76761559/197427132-408002b2-5b02-4a2c-b4f7-0e8bdad6da9a.PNG)
+
+Note the highlighted section of our results. This time, the database designers decide to create a new record for Tom's different skills.
+
+*Benefit*:
+- It is now possible to isolate information about Tom's different skills.
+
+*Drawbacks*: 
+- Cannot use Tom's ID number because it is no longer unique
+- The processing speed is slow due to added rows.
+- Queries/Updates are error-prone because of the repeating information is found in many areas.
